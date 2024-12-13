@@ -1,4 +1,4 @@
-# K8s-cloud-threat-gen
+# Kubernetes & Cloud Threat Generator
 Open Source Threat Generator for Linux hosts, containers, Kubernetes and cloud
 
 
