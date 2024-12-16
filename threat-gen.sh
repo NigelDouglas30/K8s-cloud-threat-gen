@@ -112,11 +112,11 @@ run_additional_commands() {
     echo "Switch to the binary directory"
     cd xmrig-6.16.4
     sleep 1
-    echo "Executing XMRig with donate-level 8..."
-    timeout 3 ./xmrig --donate-level 8 -o 47.115.41.163:14433 -u 422skia35WvF9mVq9Z9oCMRtoEunYQ5kHPvRqpH1rGCv1BzD5dUY4cD8wiCMp4KQEYLAN1BuawbUEJE99SNrTv9N9gf2TWC --tls --coin monero
+    echo "Executing XMRig with common mining pool address..."
+    timeout 3 ./xmrig --donate-level 8 -o 47.115.41.163:14433 -u 422skia35WvF9mVq9Z9oCMRtoEunYQ5kHPvRqpH1rGCv1BzD5dUY4cD8wiCMp4KQEYLAN1BuawbUEJE99SNrTv9N9gf2TWC --tls --coin monero > /dev/null 2>&1
     sleep 1
-    echo "Executing XMRig with alternative pool..."
-    timeout 3 ./xmrig -o stratum+tcp://xmr.pool.minergate.com:45700 -u lies@lies.lies -p x -t 2
+    echo "Executing XMRig with Stratum protocol..."
+    timeout 3 ./xmrig -o stratum+tcp://xmr.pool.minergate.com:45700 -u lies@lies.lies -p x -t 2 > /dev/null 2>&1
     sleep 1
     echo "Remove xmrig from filesystem"
     rm xmrig
