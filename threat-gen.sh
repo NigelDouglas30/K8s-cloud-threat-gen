@@ -68,7 +68,11 @@ simulate_falco() {
     sudo insmod /path/to/module.ko
 
     echo "3. Launching debugfs in a privileged container..."
-    docker run --privileged -it --rm ubuntu:latest debugfs
+    # docker run --privileged -it --rm ubuntu:latest debugfs
+    kubectl apply -f https://raw.githubusercontent.com/nigel-falco/falco-talon-testing/main/dodgy-pod.yaml
+    kubectl exec -it dodgy-pod -- bash
+    sleep 3
+    exit
 
     echo "4. Creating release_agent for container escape simulation..."
     echo "/path/to/exploit" | sudo tee /sys/fs/cgroup/release_agent
