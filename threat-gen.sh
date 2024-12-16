@@ -138,10 +138,9 @@ run_additional_commands() {
 
 # Cleanup Function
 cleanup_simulations() {
-    echo "Cleaning up simulations..."
-    rm -f ~/.aws/credentials_exfiltrated
-    kubectl delete pod malicious-pod --ignore-not-found >/dev/null 2>&1
-    rm -f /tmp/linux_simulation_file.txt
+    echo "Cleaning up xmrig files and folders..."
+    rm -r xmrig-6.16.4
+    rm xmrig-6.16.4-linux-static-x64.tar.gz
     echo "All simulations cleaned up."
     echo
 }
