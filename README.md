@@ -18,9 +18,3 @@ Run the threat generator without any feature flags
 ```
 ./threat-gen.sh
 ```
-
-
-Sending the packet capture from my Linux box to my local workstation:
-```
-scp -i nigel-inspect.pem ubuntu@ec2-**-**-**-**.eu-west-1.compute.amazonaws.com:/home/ubuntu/nigel-capture.scap ~/Desktop/
-```
